@@ -1,0 +1,16 @@
+# staticwebsite
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/Shri19-web/staticwebsite.git'
+            }
+        }
+        stage('Deploy to S3') {
+            steps {
+                sh 'aws s3 sync . s3://aws.1-bucket --delete'
+            }
+        }
+    }
+}
